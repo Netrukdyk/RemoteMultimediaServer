@@ -1,6 +1,7 @@
 from win32api import keybd_event, MapVirtualKey
 from win32con import KEYEVENTF_KEYUP
 import time
+import os
 
 VK_MEDIA_NEXT_TRACK = 0xB0
 VK_MEDIA_PREV_TRACK = 0xB1
@@ -61,5 +62,5 @@ def zoom():
 	keybd_event(VK_RETURN,0 ,KEYEVENTF_KEYUP ,0)
 	
 def sleep():
-	keybd_event(VK_SLEEP, sleepCode)
-	
+	#keybd_event(VK_SLEEP, sleepCode)
+	os.system("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")
