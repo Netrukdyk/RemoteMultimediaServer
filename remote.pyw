@@ -25,15 +25,18 @@ class Ui(QMainWindow):
 	def initTray(self):
 		self.m = QMenu()
 		self.m.addAction(QApplication.style().standardIcon(QStyle.SP_DialogCloseButton), 'Exit', self.onTrayActionExit)		
-		self.tray = QSystemTrayIcon(QIcon("images/icon.ico"), self)
+		self.tray = QSystemTrayIcon(QIcon("icon.ico"), self)
 		self.tray.activated.connect(self.onTrayActivated)		
 		self.tray.setContextMenu(self.m)
 		self.tray.show()
 		
 	def onTrayActivated(self, reason):
 		if reason == QSystemTrayIcon.ActivationReason.Trigger:
-			if self.isVisible():	self.hide()
-			else: 					self.show()
+			if self.isVisible():
+				self.hide()
+			else:
+				self.show()
+				self.setWindowState(Qt.WindowActive)
 		
 	def onTrayActionExit(self):
 		self.m.destroy()
@@ -47,8 +50,8 @@ class Ui(QMainWindow):
 			if self.windowState() & Qt.WindowMinimized:
 				event.ignore()
 				QTimer.singleShot(0, self.hide)
-				self.tray.showMessage('RemoteMultimedia', 'Running in the background.')
-				return			
+				#self.tray.showMessage('RemoteMultimedia', 'Running in the background.')
+				return
 
 class Remote(QObject):
 	def __init__(self):
@@ -57,7 +60,7 @@ class Remote(QObject):
 		self.server = Server(7000)
 		self.ui = Ui()
 		self.ui.show()
-		self.ui.server_ip.setText(self.server.ip)
+		self.ui.server_ip.setText(self.server.name+"@"+self.server.ip)
 		
 		self.app.aboutToQuit.connect(self.exitHandler)
 		sys.exit(self.app.exec_())

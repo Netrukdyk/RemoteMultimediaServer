@@ -1,0 +1,38 @@
+Traceback (most recent call last):
+  File "remote.pyw", line 2, in <module>
+  File "<frozen importlib._bootstrap>", line 2214, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2203, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\Python34\lib\site-packages\PySide\__init__.py", line 41, in <module>
+    _setupQtDirectories()
+  File "C:\Python34\lib\site-packages\PySide\__init__.py", line 11, in _setupQtDirectories
+    pysideDir = _utils.get_pyside_dir()
+  File "C:\Python34\lib\site-packages\PySide\_utils.py", line 93, in get_pyside_dir
+    return _get_win32_case_sensitive_name(os.path.abspath(os.path.dirname(QtCore.__file__)))
+  File "C:\Python34\lib\site-packages\PySide\_utils.py", line 84, in _get_win32_case_sensitive_name
+    path = _get_win32_long_name(_get_win32_short_name(s))
+  File "C:\Python34\lib\site-packages\PySide\_utils.py", line 59, in _get_win32_short_name
+    raise WinError()
+FileNotFoundError: [WinError 3] The system cannot find the path specified.
+Traceback (most recent call last):
+  File "remote.pyw", line 2, in <module>
+  File "<frozen importlib._bootstrap>", line 2214, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 2203, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1191, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1161, in _load_backward_compatible
+  File "C:\Python34\lib\site-packages\zipextimporter.py", line 86, in load_module
+    return zipimport.zipimporter.load_module(self, fullname)
+  File "C:\Python34\lib\site-packages\PySide\__init__.py", line 41, in <module>
+    _setupQtDirectories()
+  File "C:\Python34\lib\site-packages\PySide\__init__.py", line 11, in _setupQtDirectories
+    pysideDir = _utils.get_pyside_dir()
+  File "C:\Python34\lib\site-packages\PySide\_utils.py", line 93, in get_pyside_dir
+    return _get_win32_case_sensitive_name(os.path.abspath(os.path.dirname(QtCore.__file__)))
+  File "C:\Python34\lib\site-packages\PySide\_utils.py", line 84, in _get_win32_case_sensitive_name
+    path = _get_win32_long_name(_get_win32_short_name(s))
+  File "C:\Python34\lib\site-packages\PySide\_utils.py", line 59, in _get_win32_short_name
+    raise WinError()
+FileNotFoundError: [WinError 3] The system cannot find the path specified.

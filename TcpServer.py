@@ -7,8 +7,10 @@ class Server(QTcpServer):
 	
 	def __init__(self, port):
 		QTcpServer.__init__(self)		
-		self.port = port		
-		self.ip = getLocalIp()
+		self.port = port
+		self.serverId = getLocalIp()
+		self.ip = self.serverId[1]
+		self.name = self.serverId[0]
 		self.startUdp()
 				
 		self.listen(QHostAddress.Any, self.port)
