@@ -39,8 +39,9 @@ class Server(QTcpServer):
 			QByteArray.number(num)
 			
 			if(data[0]=="RMS"):
-				respond = QByteArray.toBase64(data[0]+"_"+QByteArray.number(num)+"#"+self.ip)
-				udp.writeDatagram(respond, QHostAddress(sender), senderPort)
+				#RMS_0000#192.168.1.200#Mindis-PC
+				respond = data[0]+"_"+QByteArray.number(num)+"#"+self.ip+"#"+self.name
+				udp.writeDatagram(QByteArray.toBase64(respond), QHostAddress(sender), senderPort)
 
 #-------- SERVER EVENTS----------
 	def onNewClient(self):
