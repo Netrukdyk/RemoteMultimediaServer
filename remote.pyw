@@ -20,7 +20,7 @@ class Ui(QMainWindow):
 		self.vol_down.clicked.connect(kb.vold)
 		self.mute.clicked.connect(kb.mute)
 		self.media.clicked.connect(kb.media)
-		self.zoom.clicked.connect(kb.zoom)
+		self.zoom.clicked.connect(kb.zoom)				
 		
 	def initTray(self):
 		self.m = QMenu()
@@ -55,16 +55,28 @@ class Ui(QMainWindow):
 
 class Remote(QObject):
 	def __init__(self):
-		self.app = QApplication(sys.argv)
-		
-		self.server = Server(7000)
+		self.app = QApplication(sys.argv)		
+		self.server = Server(7000)		
+		self.server.onClientAdded.connect(self.onClientConnected)
+		self.server.onClientRemoved.connect(self.onClientDisconnected)
 		self.ui = Ui()
 		self.ui.show()
 		self.ui.server_ip.setText(self.server.name+"@"+self.server.ip)
 		
+		self.recalculate()
+		
 		self.app.aboutToQuit.connect(self.exitHandler)
 		sys.exit(self.app.exec_())
+	
+	def onClientConnected(self):
+		self.recalculate()
+	
+	def onClientDisconnected(self):
+		self.recalculate()
 
+	def recalculate(self):
+		self.ui.server_info.setTitle("Server info ("+str(len(self.server.clients))+" connected)")
+		
 	def exitHandler(self):
 		self.server.close()
 		self.server = None

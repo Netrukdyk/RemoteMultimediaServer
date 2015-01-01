@@ -4,7 +4,8 @@ from LocalIp import getLocalIp
 from VirtMediaKeyb import * 
 
 class Server(QTcpServer):
-	
+	onClientAdded = Signal()
+	onClientRemoved = Signal()
 	def __init__(self, port):
 		QTcpServer.__init__(self)		
 		self.port = port
@@ -49,11 +50,13 @@ class Server(QTcpServer):
 		client = Client(sock)
 		self.clients.append(client)
 		client.disconnected.connect(self.onClientDisconnected)
+		self.onClientAdded.emit()
 
 	def onClientDisconnected(self):
 		client = self.sender()
 		print("Client from "+client.socket.peerAddress().toString()+":"+str(client.socket.peerPort())+" disconnected")										
 		self.clients.remove(client)
+		self.onClientRemoved.emit()
 
 class Client(QObject):
 	disconnected = Signal()
