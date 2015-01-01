@@ -31,10 +31,11 @@ class Server(QTcpServer):
 		udp = self.udp
 		while udp.hasPendingDatagrams():
 			datagram = QByteArray()
-			datagram.resize(64)
-			(datagram, sender, senderPort) = udp.readDatagram(64)			
+			datagram.resize(udp.pendingDatagramSize())
+			(datagram, sender, senderPort) = udp.readDatagram(datagram.size())
+			print(QByteArray.fromBase64(datagram))
 			data = QByteArray.fromBase64(datagram).split("_")
-			print("UDP:",data[0]+"_"+data[1])		
+			print("UDP:",data[0]+"_"+data[1])
 			(num, ok) = data[1].toInt(10)			
 			num = num + 1234
 			QByteArray.number(num)
